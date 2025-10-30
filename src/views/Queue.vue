@@ -3,18 +3,18 @@
       <!-- 导航栏 -->
       <div class="navbar">
         <div class="back" @click="$router.back()">
-            <img src="@/assets/导航栏图标1.png" alt="" class="nav-icon">
+            <img src="/images/导航栏图标1.png" alt="" class="nav-icon">
         </div>
         <div class="title">排队取号</div>
         <div class="right-icons">
-            <img src="@/assets/导航栏图标2.png" alt="" class="nav-icon">
-            <img src="@/assets/导航栏图标3.png" alt="" class="nav-icon">
+            <img src="/images/导航栏图标2.png" alt="" class="nav-icon">
+            <img src="/images/导航栏图标3.png" alt="" class="nav-icon">
         </div>
       </div>
   
       <!-- 警告横幅 -->
       <div class="pageone-container">
-        <img src="@/assets/警告图.png" alt="pageone" class="pageone">
+        <img src="/images/警告图.png" alt="pageone" class="pageone">
       </div>
       <h3 style="margin-left: 10px;">门店信息</h3> 
       <!-- 门店信息 -->
@@ -37,7 +37,7 @@
             autofocus
             />
             <span class="icon-box">
-                <img src="@/assets/导航小图标.png" alt="" class="small-icon">
+                <img src="/images/导航小图标.png" alt="" class="small-icon">
             </span>
             <span>0.1公里</span>
             </span>
@@ -46,7 +46,7 @@
         <div class="info-item-2">
             <span class="icon-wrapper">
                 <span class="icon-box">
-                <img src="@/assets/营业时间小图标.png" alt="" class="small-icon">
+                <img src="/images/营业时间小图标.png" alt="" class="small-icon">
             </span>       
         <!-- 可点击的文本 -->
             <span @click="editTime = true" class="clickable-text">
@@ -70,7 +70,7 @@
         <div class="info-item-2">
             <span class="icon-wrapper">
                 <span class="icon-box">
-                <img src="@/assets/位置小图标.png" alt="" class="small-icon">
+                <img src="/images/位置小图标.png" alt="" class="small-icon">
             </span>
         <!-- 可点击的文本 -->
             <span @click="editPosition = true" class="clickable-text">
@@ -218,6 +218,7 @@
 
     <script setup lang="ts">
     import { ref } from 'vue'
+
 
     // 营业门店
     // 当前显示的门店
