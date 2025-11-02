@@ -9,9 +9,11 @@ lerna-debug.log*
 *.tmp
 
 .node/
+.vite/
+.cache/
 node_modules/
 .DS_Store
-dist
+dist/
 dist-ssr
 coverage
 *.local
