@@ -5,12 +5,12 @@ import vueJsx from '@vitejs/plugin-vue-jsx';
 import vueDevTools from 'vite-plugin-vue-devtools';
 // https://vite.dev/config/
 export default defineConfig({
+    base: '/jihai-queue/',
     plugins: [
         vue(),
         vueJsx(),
         vueDevTools(),
     ],
-    base: '/jihai-queue/',
     resolve: {
         alias: {
             '@': fileURLToPath(new URL('./src', import.meta.url))
