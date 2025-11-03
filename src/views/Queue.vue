@@ -415,7 +415,6 @@
   <style scoped>
   .queue-page {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background-color: #f8f8f8;
     color: #333;
   }
   
@@ -466,7 +465,6 @@
   .pageone-container {
     /* margin-top: 40px; */
     width: 100%;
-    height: 150px; /* 固定高度 */
     overflow: hidden;
     border-radius: 12px; /* 可选：圆角 */
     margin-bottom: 16px;
@@ -474,7 +472,6 @@
   
   .pageone {
     width: 100%;
-    height: 100%;
     object-fit: cover; /* 填充模式 */
     object-position: center top; /* 从顶部开始显示 */
     display: block;
