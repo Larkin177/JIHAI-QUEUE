@@ -1,17 +1,6 @@
 <template>
     <div class="queue-page">
-      <!-- 导航栏 -->
-      <div class="navbar">
-        <div class="back" @click="$router.back()">
-            <img src="/images/导航栏图标1.png" alt="" class="nav-icon">
-        </div>
-        <div class="title">排队取号</div>
-        <div class="right-icons">
-            <img src="/images/导航栏图标2.png" alt="" class="nav-icon">
-            <img src="/images/导航栏图标3.png" alt="" class="nav-icon">
-        </div>
-      </div>
-  
+
       <!-- 警告横幅 -->
       <div class="pageone-container">
         <img src="/images/警告图.png" alt="pageone" class="pageone">
@@ -427,7 +416,6 @@
   .queue-page {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     background-color: #f8f8f8;
-    padding: 10px;
     color: #333;
   }
   
@@ -476,7 +464,7 @@
   
   /* 警告横幅 */
   .pageone-container {
-    margin-top: 40px;
+    /* margin-top: 40px; */
     width: 100%;
     height: 150px; /* 固定高度 */
     overflow: hidden;
