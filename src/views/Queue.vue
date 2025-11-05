@@ -118,71 +118,16 @@
           <div class="item">
             <span class="label">号码状态</span>
             <span class="spacer">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-            <span @click="editNStatus = true">{{ currentNStatus }}</span>
-            <input
-            v-if="editNStatus"
-            v-model="tempNStatus"
-            type="text"
-            placeholder="等待叫号/已过号"
-            @blur="saveNStatus"
-            @keyup.enter="saveNStatus"
-            @keyup.esc="cancelNStatus"
-            class="info-item"
-            autofocus
-            />
+            <span @click="numberIsPassing = !numberIsPassing">{{ numberIsPassing ? '已过号' : '等待叫号' }}</span>
           </div>
-          <div class="item">
-            <span class="label">当前叫号</span>
-            <span class="spacer">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-            <strong style="font-weight: bold;" @click="editCall = true">{{ currentCall }}</strong>
-            <input
-            v-if="editCall"
-            v-model="tempCall"
-            type="text"
-            placeholder="请输入当前被叫号码"
-            @blur="saveCall"
-            @keyup.enter="saveCall"
-            @keyup.esc="cancelCall"
-            class="info-item"
-            autofocus
-            />
-          </div>
-          <div class="item">
-            <span class="label">等待桌数</span>
-            <span class="spacer">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-            <span style="color: red;" @click="editTNumber = true">{{ currentTNumber }}</span><span  style="color: #333;">&nbsp;桌</span>
-            <input
-            v-if="editTNumber"
-            v-model="tempTNumber"
-            type="text"
-            placeholder="请输入当前被叫号码"
-            @blur="saveTNumber"
-            @keyup.enter="saveTNumber"
-            @keyup.esc="cancelTNumber"
-            class="info-item"
-            autofocus
-            />
-          </div>
-          <div class="item">
-            <span class="label">取号时间</span>
-            <span class="spacer">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-            <span class="value" @click="editNTime = true">{{ currentNTime }}</span>
-            <input
-            v-if="editNTime"
-            v-model="tempNTime"
-            type="text"
-            placeholder="2025-10-27 18:40"
-            @blur="saveNTime"
-            @keyup.enter="saveNTime"
-            @keyup.esc="cancelNTime"
-            class="info-item"
-            autofocus
-            />
-          </div>
+
+        </div>
+        <div style="text-align: left;display: flex;flex-direction: column;gap: 10px;padding-top: 10px;">
+          <component :is="numberIsPassing ? QueuePassing : QueueWaiting" />
         </div>
       </div>
   
-      <!-- 按钮区 -->
+      <!-- 说明区 -->
       <div class="button-group">
         <button class="btn-small">过号说明</button>
         <p class="ExplanationofNumberExceeding">过号1--5桌，顺延3桌<br>过号5--10桌，顺延5桌<br>过号10桌作废，请重新取号</p>
@@ -190,25 +135,18 @@
 
       <!-- 最底部 -->
       <div class="bottom">
-        <button class="btn-large">取消排队</button>
+        <button v-if="!numberIsPassing" class="btn-large">取消排队</button>
+        <button v-else class="btn-large">我要延桌</button>
       </div>
     </div>
   </template>
   
-  <script lang="ts">
-  export default {
-    name: 'Queue',
-    setup() {
-      // 可以在这里添加数据逻辑，比如从 API 获取排队号
-      return {}
-    }
-  }
-  </script>
 
     <script setup lang="ts">
     import { ref } from 'vue'
-
-
+    import QueuePassing from '/src/components/QueuePassing.vue'
+    import QueueWaiting from '/src/components/QueueWaiting.vue'
+    const numberIsPassing = ref(false);
     // 营业门店
     // 当前显示的门店
     const currentRestaurant = ref('东街口·三坊七巷店')
@@ -348,68 +286,6 @@
     tempNStatus.value = currentNStatus.value
     editNStatus.value = false
     }
-
-    
-    // 当前叫号
-    const currentCall = ref('A81')
-    const editCall = ref(false)
-    const tempCall = ref('')
-    const startEditCall = () => {
-    tempCall.value = currentCall.value
-    editCall.value = true
-    }
-    const saveCall = () => {
-    if (tempCall.value.trim()) {
-        currentCall.value = tempCall.value.trim()
-    }
-    editCall.value = false
-    }
-    const cancelCall = () => {
-    tempCall.value = currentCall.value
-    editCall.value = false
-    }
-    const currentCallNumber = ref(currentCall.value.replace(/[^0-9]/g, ''))
-
-    // 等待桌数
-    const currentTNumber = ref((parseInt(currentNNumber.value) - parseInt(currentCallNumber.value)).toString())
-    const editTNumber = ref(false)
-    const tempTNumber = ref('')
-    const startEditTNumber = () => {
-    tempTNumber.value = currentTNumber.value
-    editTNumber.value = true
-    }
-    const saveTNumber = () => {
-    if (tempTNumber.value.trim()) {
-        currentTNumber.value = tempTNumber.value.trim()
-    }
-    editTNumber.value = false
-    }
-    const cancelTNumber = () => {
-    tempTNumber.value = currentTNumber.value
-    editTNumber.value = false
-    }
-
-    // 取号时间
-    const currentNTime = ref('2025-10-27 18:40')
-    const editNTime = ref(false)
-    const tempNTime = ref('')
-    const startEditNTime = () => {
-    tempNTime.value = currentNTime.value
-    editNTime.value = true
-    }
-    const saveNTime = () => {
-    if (tempNTime.value.trim()) {
-        currentNTime.value = tempNTime.value.trim()
-    }
-    editNTime.value = false
-    }
-    const cancelNTime = () => {
-    tempNTime.value = currentNTime.value
-    editNTime.value = false
-    }
-
-
-
     </script>
   
   <style scoped>
@@ -571,17 +447,8 @@
     font-size: 16px;
     color: #333;
   }
-  
-  /* .label{
-    color: #666;
-    flex-shrink: 0;
-  }
-  .value{
-    color: #333;
-    margin-left: auto;
-  } */
-
-  /* 按钮组 */
+ 
+  /* 说明 */
 
   .ExplanationofNumberExceeding {
     font-size: 12px;
